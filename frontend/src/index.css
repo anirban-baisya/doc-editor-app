@@ -1,0 +1,207 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* ── Layout ── */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* ── Header ── */
+.header {
+  background: #4f46e5;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h1 { 
+  font-size: 20px; 
+  color: white;
+}
+
+/* Make ALL text inside header white */
+.header span,
+.header p,
+.header div {
+  color: white;
+}
+
+/* ── Buttons ── */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: #4f46e5;
+  color: white;
+}
+
+.btn-primary:hover { background: #4338ca; }
+
+.btn-danger {
+  background: #ef4444;
+  color: white;
+}
+
+/* .btn-light {
+  background: #e5e7eb;
+  color: #333;
+} */
+ 
+ /* Back button and light buttons inside header */
+.header .btn-light {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.header .btn-light:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Document Cards ── */
+.doc-list { margin-top: 24px; }
+
+.doc-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.doc-card:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.12); }
+
+.doc-title { font-size: 16px; font-weight: 500; }
+
+.doc-meta { font-size: 12px; color: #888; margin-top: 4px; }
+
+.badge {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.badge-owner { background: #dbeafe; color: #1d4ed8; }
+.badge-shared { background: #fef3c7; color: #92400e; }
+
+/* ── Editor ── */
+.editor-page { padding: 24px; max-width: 860px; margin: 0 auto; }
+
+.editor-title-input {
+  width: 100%;
+  font-size: 28px;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  outline: none;
+  margin-bottom: 16px;
+  color: #111;
+}
+
+.toolbar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.toolbar button {
+  padding: 6px 12px;
+  background: #f3f4f6;
+  color: #333;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.toolbar button:hover { background: #e5e7eb; }
+.toolbar button.active { background: #4f46e5; color: white; }
+
+.editor-box {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  min-height: 400px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.editor-box:focus { outline: none; }
+
+/* Tiptap editor content styles */
+.ProseMirror { outline: none; min-height: 360px; }
+.ProseMirror h1 { font-size: 26px; margin-bottom: 8px; }
+.ProseMirror h2 { font-size: 20px; margin-bottom: 8px; }
+.ProseMirror ul, .ProseMirror ol { padding-left: 24px; }
+.ProseMirror p { margin-bottom: 8px; }
+
+/* ── Share Modal ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: white;
+  border-radius: 10px;
+  padding: 24px;
+  width: 360px;
+}
+
+.modal h2 { margin-bottom: 16px; }
+
+.modal select {
+  width: 100%; padding: 10px;
+  border-radius: 6px; border: 1px solid #d1d5db;
+  font-size: 14px; margin-bottom: 12px;
+}
+
+/* ── Misc ── */
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 24px 0 8px;
+}
+
+.actions { display: flex; gap: 8px; }
+
+/* Save status text */
+.save-status {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-left: 12px;
+}
