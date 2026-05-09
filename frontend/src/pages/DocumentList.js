@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { getDocuments, createDocument, deleteDocument, uploadFile } from '../api'
 
 export default function DocumentList({ currentUser, onOpenDoc }) {
@@ -11,13 +11,10 @@ export default function DocumentList({ currentUser, onOpenDoc }) {
   // Loading state so we don't show empty list while fetching
   const [loading, setLoading] = useState(true)
 
-  // ── Fetch documents when page loads ──────────────────
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    fetchDocs()
-  }, [])
-
-  const fetchDocs = async () => {
+  // ── Fetch documents function wrapped in useCallback ───
+  // useCallback means this function is only recreated if
+  // currentUser.id changes — this fixes the ESLint warning
+  const fetchDocs = useCallback(async () => {
     setLoading(true)
     try {
       const res = await getDocuments(currentUser.id)
@@ -26,7 +23,16 @@ export default function DocumentList({ currentUser, onOpenDoc }) {
       console.error('Failed to fetch documents', err)
     }
     setLoading(false)
-  }
+  }, [currentUser.id])
+
+  // ── Fetch documents when page loads ──────────────────
+  // Now fetchDocs is stable (from useCallback), so it's
+  // safe to put it in the dependency array
+// eslint-disable-next-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    fetchDocs()
+  }, [fetchDocs])
 
   // ── Create a new blank document ───────────────────────
   const handleCreate = async () => {
