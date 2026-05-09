@@ -12,6 +12,7 @@ export default function DocumentList({ currentUser, onOpenDoc }) {
   const [loading, setLoading] = useState(true)
 
   // ── Fetch documents when page loads ──────────────────
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchDocs()
   }, [])
