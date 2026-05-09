@@ -9,7 +9,10 @@ const app = express()         // create the web server
 const prisma = new PrismaClient() // connect to the database
 const upload = multer({ dest: 'uploads/' }) // where uploaded files go
 
-app.use(cors())               // allow React frontend to call this server
+// Allow requests from any origin (frontend on Vercel + local)
+app.use(cors({
+  origin: '*'
+}))
 app.use(express.json())       // allow server to read JSON from requests
 
 // ─────────────────────────────────────────
@@ -154,7 +157,9 @@ app.post('/documents/upload', upload.single('file'), async (req, res) => {
 // ─────────────────────────────────────────
 // START SERVER
 // ─────────────────────────────────────────
-const PORT = 3001
+// On Render, PORT is set automatically by the server
+// Locally it falls back to 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
-  console.log(`✅ Backend running at http://localhost:${PORT}`)
+  console.log(`Backend running at http://localhost:${PORT}`)
 })
