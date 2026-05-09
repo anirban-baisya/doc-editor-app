@@ -1,0 +1,43 @@
+// This is my Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// A User is someone who can own or receive shared documents
+model User {
+  id         Int         @id @default(autoincrement())
+  email      String      @unique
+  name       String
+  documents  Document[]  // documents this user owns
+  sharedWith SharedDoc[] // documents shared WITH this user
+}
+
+// A Document belongs to one owner, can be shared with many users
+model Document {
+  id         Int         @id @default(autoincrement())
+  title      String      @default("Untitled")
+  content    String      @default("")
+  ownerId    Int
+  owner      User        @relation(fields: [ownerId], references: [id])
+  sharedWith SharedDoc[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+// A SharedDoc is the "bridge" — it links a document to a user who can view it
+model SharedDoc {
+  id         Int      @id @default(autoincrement())
+  documentId Int
+  userId     Int
+  document   Document @relation(fields: [documentId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+}
