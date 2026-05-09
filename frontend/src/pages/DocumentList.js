@@ -28,7 +28,6 @@ export default function DocumentList({ currentUser, onOpenDoc }) {
   // ── Fetch documents when page loads ──────────────────
   // Now fetchDocs is stable (from useCallback), so it's
   // safe to put it in the dependency array
-// eslint-disable-next-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     fetchDocs()
