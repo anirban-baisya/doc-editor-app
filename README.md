@@ -29,7 +29,10 @@ cd backend
 npm install
 npx prisma migrate dev --name init
 npx prisma db seed
-npm run start
+
+npm run start # → runs without nodemon (always works)
+# OR
+npm run dev # → runs with nodemon (auto-restarts on save)
 # Runs at http://localhost:3001
 ```
 
